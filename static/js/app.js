@@ -15,11 +15,9 @@ tableData.forEach((ufo) => {
 
 // select the button and the form
 var button = d3.select("#filter-btn");
-var form = d3.select("#form");
 
 // create event handlers
 button.on("click", runEnter);
-form.on("submit", runEnter);
 
 // function to filter the table based on entry
 function runEnter() {
@@ -28,15 +26,23 @@ function runEnter() {
     d3.event.preventDefault();
 
     // Select the input element and get the raw HTML node
-    var inputElement = d3.select("#datetime");
+    var inputDate = d3.select("#datetime");
+    var inputCity = d3.select("#city");
 
-    // Get the value property of the input element
-    var inputValue = inputElement.property("value");
+    // Get the value property of the input elements
+    var dateValue = inputDate.property("value");
+    var cityValue = inputCity.property("value").toLowerCase();
 
-    console.log(inputValue);
+    console.log(dateValue);
+    console.log(cityValue);
 
     // filter the table based on input
-    var filteredData = tableData.filter(ufo => ufo.datetime === inputValue);
+    if (dateValue) {
+        filteredData = tableData.filter(ufo => ufo.datetime === dateValue);
+    }
+    if (cityValue) {
+        filteredData = tableData.filter(ufo => ufo.city === cityValue);
+    }
 
     console.log(filteredData);
 
