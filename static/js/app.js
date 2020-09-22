@@ -43,4 +43,13 @@ function runEnter() {
     // clear the table 
     var body = d3.select("#body");
     body.html("");
+
+    // append rows to the table
+    filteredData.forEach((filter) => {
+        var row = tbody.append("tr");
+        Object.entries(filter).forEach(([key, value]) => {
+            var cell = row.append("td");
+            cell.text(value);
+        });
+    });
 }
